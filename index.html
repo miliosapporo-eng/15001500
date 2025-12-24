@@ -53,18 +53,17 @@
         /* 金継ぎ装飾 (Kintsugi Effect) */
         .kintsugi-bg {
             position: relative;
-            /* 修正: overflow: hidden を削除し、横スクロールのみ防止に変更 */
             overflow-x: hidden;
             min-height: 100vh;
         }
         .kintsugi-bg::before {
             content: '';
-            position: fixed; /* 修正: スクロールしても背景模様が固定されるようにfixedに変更 */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* 金継ぎ風のひび割れパターン (SVGデータURI) */
+            /* 金継ぎ風のひび割れパターン */
             background-image: url("data:image/svg+xml,%3Csvg width='400' height='400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 Q 50 40 100 60 T 200 40 T 300 80 T 400 50 M 50 0 Q 60 50 40 100 T 80 200 T 50 300 T 90 400' stroke='rgba(212, 175, 55, 0.15)' stroke-width='1.5' fill='none'/%3E%3Cpath d='M200 0 Q 210 80 190 150 T 230 250 T 200 400' stroke='rgba(212, 175, 55, 0.1)' stroke-width='1' fill='none'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 0;
@@ -118,7 +117,7 @@
 </head>
 <body class="bg-otaru-dark text-slate-200 selection:bg-yellow-600 selection:text-white kintsugi-bg">
 
-    <!-- 金継ぎラインオーバーレイ（画面全体に大きなひび割れを配置 - 固定表示） -->
+    <!-- 金継ぎラインオーバーレイ -->
     <div class="fixed inset-0 pointer-events-none z-0 opacity-40 mix-blend-overlay">
         <svg width="100%" height="100%" preserveAspectRatio="none">
             <path d="M0,100 Q300,150 500,50 T1000,200 T1500,100" stroke="#d4af37" stroke-width="0.5" fill="none" />
@@ -247,9 +246,18 @@
                         近年、パンデミックや様々な社会現象によって、心身ともに辛い時間を過ごされた方も多いのではないでしょうか。<br/>
                         私、<strong class="text-white">430（しみお）</strong>もその一人でしたが、今ようやく12歳の少年が心の扉を開いたような、晴れやかな気分です。
                     </p>
+                    <p class="mb-2 text-lg font-zen">
+                        そこで始めようというのが、<strong class="text-otaru-gold font-medieval text-2xl tracking-wide mx-1 drop-shadow-md">1500 × 1500 PROJECT</strong>です。
+                    </p>
+                    
+                    <!-- 中央配置・フレキシブルフォント・折り返しなし -->
+                    <div class="my-10 text-center w-full">
+                        <p class="bg-[#0d2331] border border-otaru-gold px-4 py-4 rounded-xl font-bold text-white inline-block font-zen shadow-[0_0_15px_rgba(212,175,55,0.3)] leading-relaxed" style="font-size: clamp(0.9rem, 3.8vw, 1.8rem); white-space: nowrap;">
+                            15分1500円で1500人分のスナップポートレートを撮り集める
+                        </p>
+                    </div>
+
                     <p class="mb-6 text-lg font-zen">
-                        そこで始めようというのが、<strong class="text-otaru-gold font-medieval text-2xl tracking-wide mx-1 drop-shadow-md">1500 × 1500 PROJECT</strong>です。<br/>
-                        <span class="bg-[#0d2331] border border-otaru-gold px-2 py-1 rounded mx-1 font-bold text-slate-200 inline-block font-zen text-sm">15分1500円で1500人分のスナップポートレートを撮り集める</span><br/>
                         という、シンプルかつ壮大なチャレンジです。
                     </p>
                     <p class="font-bold text-xl text-white mt-8 mb-4 border-l-4 border-otaru-gold pl-4 font-zen tracking-wide bg-gradient-to-r from-otaru-gold/10 to-transparent py-2">
@@ -356,7 +364,7 @@
             
             <div class="mt-12 bg-yellow-900/20 border border-yellow-700/50 p-4 rounded-xl text-center text-yellow-200 text-sm max-w-2xl mx-auto">
                 <span class="font-bold block mb-1 text-otaru-gold">⚠️ ご注意</span>
-                本プロジェクトは展示・写真集化を目指しているため、モデルリリース（肖像権使用許諾）へのサインが必須となります。
+                本プロジェクトは展示・写真集化を目指しているため、<br class="hidden md:inline">モデルリリース（肖像権使用許諾）へのサインが必須となります。
             </div>
         </div>
     </section>
@@ -482,7 +490,7 @@
                 <div class="bg-gradient-to-b from-[#2d2210] to-[#0d2331] rounded-3xl p-8 md:p-10 shadow-[0_0_20px_rgba(212,175,55,0.1)] border border-yellow-700/50 transition hover:-translate-y-1 hover:border-otaru-gold duration-300 relative overflow-hidden group">
                     <div class="absolute top-0 right-0 bg-otaru-gold text-[#0d2331] text-xs font-medieval tracking-wider px-4 py-2 rounded-bl-xl z-10">GIFT / SUPPORT</div>
                     <h3 class="text-2xl font-bold mb-2 text-otaru-gold font-zen">無期限有効チケット</h3>
-                    <p class="text-slate-400 text-sm mb-6 font-zen">遠方の方・ご支援・プレゼントに</p>
+                    <p class="text-slate-500 text-sm mb-6 font-zen">遠方の方・ご支援・プレゼントに</p>
                     
                     <div class="flex items-baseline gap-1 mb-8">
                         <span class="text-6xl font-medieval text-otaru-gold tracking-tight">¥1,500</span>
@@ -509,6 +517,40 @@
                     <span class="px-4 py-2 bg-[#0d2331] border border-slate-700 rounded-lg text-xs font-bold text-slate-400 hover:border-otaru-gold hover:text-otaru-gold transition cursor-default">ライティング ¥20,000</span>
                     <span class="px-4 py-2 bg-[#0d2331] border border-slate-700 rounded-lg text-xs font-bold text-slate-400 hover:border-otaru-gold hover:text-otaru-gold transition cursor-default">ワンコスナップ ¥30,000</span>
                     <span class="px-4 py-2 bg-[#0d2331] border border-slate-700 rounded-lg text-xs font-bold text-slate-400 hover:border-otaru-gold hover:text-otaru-gold transition cursor-default">物件撮影・街ブラPR</span>
+                </div>
+            </div>
+
+            <!-- Bank Account Info -->
+            <div class="mt-20 pt-16 border-t border-otaru-gold/20 text-center">
+                <h3 class="text-3xl font-zen text-otaru-gold mb-8 drop-shadow-md">寄付はこちら</h3>
+                <div class="bg-[#103b4a]/30 inline-block p-8 md:p-10 rounded-3xl border border-otaru-gold/30 text-left shadow-2xl relative overflow-hidden group hover:border-otaru-gold/60 transition duration-500">
+                    <!-- 装飾 -->
+                    <div class="absolute top-0 right-0 w-16 h-16 border-t border-r border-otaru-gold rounded-tr-2xl opacity-50"></div>
+                    <div class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-otaru-gold rounded-bl-2xl opacity-50"></div>
+                    
+                    <p class="text-slate-300 text-sm mb-6 font-zen text-center border-b border-otaru-gold/20 pb-4">銀行振込でのご支援も受け付けております</p>
+                    <dl class="text-slate-200 space-y-4 font-zen text-lg">
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">銀行名</dt>
+                            <dd class="font-bold tracking-wider">◯◯銀行</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">支店名</dt>
+                            <dd class="font-bold tracking-wider">◯◯支店</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">口座種別</dt>
+                            <dd class="font-bold tracking-wider">普通</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
+                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">口座番号</dt>
+                            <dd class="font-bold tracking-widest font-futuristic text-xl">1234567</dd>
+                        </div>
+                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 pt-2 border-t border-dashed border-otaru-gold/30 mt-2">
+                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">口座名義</dt>
+                            <dd class="font-bold tracking-wider">合同会社MiLio</dd>
+                        </div>
+                    </dl>
                 </div>
             </div>
         </div>
@@ -610,11 +652,11 @@
                 
                 <h3 class="text-white font-bold text-xl mb-4 relative z-10 font-zen tracking-wide">タイアップ広告・協賛について</h3>
                 <p class="text-sm text-slate-300 mb-8 leading-relaxed relative z-10 max-w-2xl mx-auto font-zen">
-                    本プロジェクト、および展示会・写真集におけるタイアップ広告、企業スポンサー様を募集しております。<br/>
+                    本プロジェクト、および展示会・写真集における<br>タイアップ広告、企業スポンサー様を募集しております。<br/>
                     街のPRとしての撮影（街ブラスナップ）なども承りますので、お気軽にお問い合わせください。
                 </p>
-                <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 bg-otaru-gold text-[#0d2331] px-8 py-3 rounded-full text-sm font-bold hover:bg-white transition relative z-10 font-zen tracking-wide gold-shine shadow-lg">
-                    <i data-lucide="mail" class="w-4 h-4"></i> お問い合わせフォームへ
+                <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 bg-otaru-gold text-[#0d2331] px-8 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-[#0d2331] transition duration-300 relative z-10 font-zen tracking-wide shadow-lg group">
+                    <i data-lucide="mail" class="w-4 h-4 group-hover:scale-110 transition"></i> お問い合わせフォームへ
                 </a>
             </div>
         </div>
