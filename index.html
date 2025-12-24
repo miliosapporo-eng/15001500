@@ -1,1 +1,380 @@
-test
+import React, { useState, useEffect } from 'react';
+import { Camera, MapPin, Calendar, Heart, MessageCircle, Instagram, ExternalLink, Menu, X, ChevronDown, CheckCircle, Ticket } from 'lucide-react';
+
+const ProjectSite = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeFaq, setActiveFaq] = useState(null);
+
+  const toggleFaq = (index) => {
+    setActiveFaq(activeFaq === index ? null : index);
+  };
+
+  // ギャラリー用ダミー画像（実際の作品に差し替えてください）
+  const galleryImages = [
+    { id: 1, src: "https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&q=80&w=600", alt: "Portrait Sample 1" },
+    { id: 2, src: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600", alt: "Portrait Sample 2" },
+    { id: 3, src: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600", alt: "Portrait Sample 3" },
+    { id: 4, src: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=600", alt: "Portrait Sample 4" },
+  ];
+
+  // 日記データ
+  const diaryEntries = [
+    { date: '2025.10.20', title: 'プロジェクト始動しました', content: 'ようやく心の扉が開いたような気分です。ここから2年、走り抜けます。' },
+    { date: '2025.10.25', title: '札幌駅周辺でのロケハン', content: '15分で何を切り取れるか。光の入り方を重点的にチェックしてきました。' },
+  ];
+
+  return (
+    <div className="min-h-screen bg-white text-slate-800 font-sans selection:bg-blue-100">
+      
+      {/* ナビゲーション */}
+      <nav className="fixed w-full bg-white/90 backdrop-blur-md z-50 border-b border-slate-100">
+        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+          <div className="font-bold text-xl tracking-tighter flex flex-col leading-none">
+            <span className="text-blue-600">STUDIO USHIO</span>
+            <span className="text-xs text-slate-500">MiLio LLC.</span>
+          </div>
+          
+          {/* PC Menu */}
+          <div className="hidden md:flex space-x-8 text-sm font-bold tracking-wide">
+            <a href="#about" className="hover:text-blue-600 transition">CONCEPT</a>
+            <a href="#flow" className="hover:text-blue-600 transition">FLOW</a>
+            <a href="#gallery" className="hover:text-blue-600 transition">GALLERY</a>
+            <a href="#support" className="hover:text-blue-600 transition">TICKET & SUPPORT</a>
+            <a href="#faq" className="hover:text-blue-600 transition">Q&A</a>
+          </div>
+
+          <div className="hidden md:block">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="bg-slate-900 text-white px-5 py-2 rounded-full font-bold text-sm hover:bg-blue-600 transition flex items-center gap-2">
+              <Instagram size={16} /> Follow Me
+            </a>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            {isMenuOpen ? <X /> : <Menu />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t p-6 space-y-4 shadow-lg absolute w-full">
+            <a href="#about" className="block font-bold text-lg" onClick={() => setIsMenuOpen(false)}>CONCEPT</a>
+            <a href="#flow" className="block font-bold text-lg" onClick={() => setIsMenuOpen(false)}>FLOW</a>
+            <a href="#support" className="block font-bold text-lg" onClick={() => setIsMenuOpen(false)}>TICKET</a>
+            <a href="#schedule" className="block font-bold text-lg" onClick={() => setIsMenuOpen(false)}>SCHEDULE</a>
+          </div>
+        )}
+      </nav>
+
+      {/* ヒーローセクション */}
+      <header className="relative pt-32 pb-20 px-6 overflow-hidden">
+        <div className="container mx-auto max-w-5xl">
+          <div className="flex flex-col md:flex-row items-center gap-12">
+            <div className="md:w-1/2 z-10">
+              <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-bold mb-4 tracking-wider">
+                RE-START PROJECT 2024-2026
+              </span>
+              <h1 className="text-5xl md:text-7xl font-black leading-tight mb-6">
+                1500<span className="text-blue-600">人</span> × <br/>
+                1500<span className="text-blue-600">円</span> × <br/>
+                15<span className="text-blue-600">分</span>
+              </h1>
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed font-medium">
+                「しみお、再始動。」<br/>
+                失われた時間を取り戻すための、<br className="md:hidden"/>スナップポートレートの挑戦。<br/>
+                あなたもこの物語の一部になりませんか？
+              </p>
+              <div className="flex gap-4">
+                <a href="#support" className="bg-blue-600 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:bg-blue-700 transition flex items-center gap-2">
+                  <Ticket size={20} />
+                  参加チケット購入 (BASE)
+                </a>
+              </div>
+            </div>
+            <div className="md:w-1/2 relative">
+              <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-transparent rounded-2xl transform rotate-3 scale-105"></div>
+              <img 
+                src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=800" 
+                alt="Portrait Session" 
+                className="rounded-2xl shadow-2xl relative z-0 transform -rotate-2 hover:rotate-0 transition duration-500"
+              />
+            </div>
+          </div>
+        </div>
+      </header>
+
+      {/* コンセプト (Introduction) */}
+      <section id="about" className="py-20 bg-slate-50 px-6">
+        <div className="container mx-auto max-w-3xl text-center">
+          <h2 className="text-3xl font-black mb-8 flex items-center justify-center gap-3">
+            <span className="w-8 h-1 bg-blue-600"></span>
+            INTRODUCTION
+            <span className="w-8 h-1 bg-blue-600"></span>
+          </h2>
+          <div className="bg-white p-8 md:p-12 rounded-2xl shadow-sm text-left leading-loose">
+            <p className="mb-6">
+              拝啓。皆様。いつも大変お世話になっております。<br/>
+              近年、パンデミックや様々な社会現象によって、心身ともに辛い時間を過ごされた方も多いのではないでしょうか。<br/>
+              私、<strong>430（しみお）</strong>もその一人でしたが、今ようやく12歳の少年が心の扉を開いたような、晴れやかな気分です。
+            </p>
+            <p className="mb-6">
+              そこで始めようというのが、<strong>「1500 × 1500 PROJECT」</strong>です。<br/>
+              <span className="text-blue-600 font-bold bg-blue-50 px-1">15分1500円で1500人分のスナップポートレートを撮り集める</span>というチャレンジです。
+            </p>
+            <p className="font-bold text-lg text-slate-800">
+              達成した暁には、盛大に展示会を催したり、写真集としてまとめたりして還元していきたいと思います。
+              これは「15分で何を切り取れるか」というゲームのような挑戦です。
+            </p>
+            <div className="mt-8 pt-8 border-t border-slate-100 flex items-center justify-end gap-4">
+              <div className="text-right">
+                <p className="font-bold text-sm">Photographer / 430 (Shimio)</p>
+                <p className="text-xs text-slate-500">MiLio LLC. / STUDIO USHIO</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 参加フロー (Flow) */}
+      <section id="flow" className="py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="text-center mb-16">
+            <span className="text-blue-600 font-bold tracking-widest text-sm">HOW TO JOIN</span>
+            <h2 className="text-3xl font-black mt-2">参加の流れ</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 relative">
+             {/* 中心線 (PCのみ) */}
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-blue-100 transform -translate-x-1/2"></div>
+
+            {[
+              { num: '01', title: 'チケット購入', desc: 'BASEショップにてチケットをご購入ください。', icon: <Ticket /> },
+              { num: '02', title: 'アンケート回答', desc: 'モデルリリース（肖像権許諾）への署名とアンケートにご協力ください。', icon: <CheckCircle /> },
+              { num: '03', title: '打ち合わせ (Zoom)', desc: 'オンラインで日程調整とイメージの擦り合わせを行います。', icon: <MessageCircle /> },
+              { num: '04', title: '撮影当日', desc: '15分間の真剣勝負。札幌駅周辺、または皆様の街で。', icon: <Camera /> },
+              { num: '05', title: '編集・投稿', desc: 'Instagramにて共同投稿でシェアさせていただきます。', icon: <Instagram /> },
+              { num: '06', title: '展示会へ', desc: '2年後の目標達成時、展示会や写真集にて公開されます。', icon: <MapPin /> },
+            ].map((step, index) => (
+              <div key={index} className={`relative flex items-center gap-6 p-6 rounded-xl border-2 border-slate-100 bg-white hover:border-blue-200 transition z-10 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse md:text-right'}`}>
+                <div className={`flex-shrink-0 w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl shadow-lg ${index % 2 !== 0 ? 'md:order-2' : ''}`}>
+                  {step.num}
+                </div>
+                <div>
+                  <h3 className="font-bold text-xl mb-2">{step.title}</h3>
+                  <p className="text-slate-600 text-sm">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          
+          <div className="mt-8 bg-yellow-50 p-6 rounded-xl border border-yellow-200 text-sm text-yellow-800">
+            <strong>ご注意：</strong> 本プロジェクトは展示・写真集化を目指しているため、モデルリリース（肖像権使用許諾）へのサインが必須となります。SNS公開がNGの方は、別途通常プランをご利用ください。
+          </div>
+        </div>
+      </section>
+
+      {/* ギャラリー (Preview) */}
+      <section id="gallery" className="py-20 bg-slate-900 text-white px-6">
+        <div className="container mx-auto">
+          <div className="flex justify-between items-end mb-12">
+            <div>
+              <h2 className="text-3xl font-black mb-2">PREVIEW</h2>
+              <p className="text-slate-400">Project Gallery</p>
+            </div>
+            <a href="https://instagram.com/430SANPO" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-white flex items-center gap-2 text-sm font-bold transition">
+              <Instagram size={18} /> Instagramを見る
+            </a>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {galleryImages.map((img) => (
+              <div key={img.id} className="aspect-square bg-slate-800 rounded-lg overflow-hidden group relative">
+                <img src={img.src} alt={img.alt} className="w-full h-full object-cover transition duration-500 group-hover:scale-110 opacity-80 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                  <span className="text-xs font-bold tracking-widest">#1500PROJECT</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* チケット・支援 (Support) */}
+      <section id="support" className="py-24 px-6 bg-gradient-to-b from-blue-50 to-white">
+        <div className="container mx-auto max-w-5xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-black text-slate-800 mb-4">JOIN & SUPPORT</h2>
+            <p className="text-slate-600">
+              撮影への参加チケット、および遠方からのご支援はBASEショップにて。
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* 通常参加チケット */}
+            <div className="bg-white rounded-3xl p-8 shadow-xl border border-slate-100 hover:shadow-2xl transition relative overflow-hidden group">
+              <div className="absolute top-0 right-0 bg-blue-600 text-white text-xs font-bold px-4 py-2 rounded-bl-xl">STANDARD</div>
+              <h3 className="text-2xl font-bold mb-2">参加チケット</h3>
+              <div className="flex items-baseline gap-1 mb-6">
+                <span className="text-4xl font-black text-blue-600">¥1,500</span>
+                <span className="text-slate-500">/ 1人</span>
+              </div>
+              <ul className="space-y-4 mb-8 text-slate-600">
+                <li className="flex gap-3"><CheckCircle size={18} className="text-blue-600 flex-shrink-0" /> 撮影 15分</li>
+                <li className="flex gap-3"><CheckCircle size={18} className="text-blue-600 flex-shrink-0" /> スナップポートレート</li>
+                <li className="flex gap-3"><CheckCircle size={18} className="text-blue-600 flex-shrink-0" /> 札幌駅周辺（基本）</li>
+                <li className="flex gap-3"><CheckCircle size={18} className="text-blue-600 flex-shrink-0" /> 展示会・写真集への掲載</li>
+              </ul>
+              <button className="w-full bg-slate-900 text-white py-4 rounded-xl font-bold hover:bg-slate-800 transition flex justify-center items-center gap-2">
+                BASEで購入する <ExternalLink size={16} />
+              </button>
+            </div>
+
+            {/* 応援・遠方チケット */}
+            <div className="bg-orange-50 rounded-3xl p-8 shadow-xl border border-orange-100 hover:shadow-2xl transition relative overflow-hidden">
+               <div className="absolute top-0 right-0 bg-orange-500 text-white text-xs font-bold px-4 py-2 rounded-bl-xl">SUPPORT / GIFT</div>
+              <h3 className="text-2xl font-bold mb-2 text-slate-800">無期限有効チケット</h3>
+              <div className="mb-6">
+                <span className="text-sm font-bold bg-orange-200 text-orange-800 px-2 py-1 rounded">遠方の方・ご支援はこちら</span>
+              </div>
+              <p className="text-slate-600 mb-6 text-sm leading-relaxed">
+                「応援してやってもいいよ」という優しい方向けのチケットです。<br/>
+                持ち前のフットワークを活かして、なんとかして撮りに伺います。<br/>
+                <strong>※誰かへのプレゼント（権利の贈答）も可能です。</strong>
+                <br/>※撮られるのは苦手という方は、寄付としてデジタルフォトをお送りします。
+              </p>
+              <button className="w-full bg-orange-500 text-white py-4 rounded-xl font-bold hover:bg-orange-600 transition flex justify-center items-center gap-2">
+                BASEで応援購入する <ExternalLink size={16} />
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-12 bg-white p-6 rounded-xl border border-slate-200 text-center">
+             <h4 className="font-bold mb-4">その他の通常メニュー</h4>
+             <p className="text-sm text-slate-500 mb-4">
+               プロジェクト以外の本格的な撮影も承っております。
+             </p>
+             <div className="flex flex-wrap justify-center gap-4 text-xs font-medium text-slate-600">
+               <span className="bg-slate-100 px-3 py-1 rounded">簡易スナップ ¥15,000</span>
+               <span className="bg-slate-100 px-3 py-1 rounded">ライティング ¥20,000</span>
+               <span className="bg-slate-100 px-3 py-1 rounded">ワンコスナップ ¥30,000</span>
+               <span className="bg-slate-100 px-3 py-1 rounded">物件撮影・街ブラ PR</span>
+             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 今後の予定 (Schedule) */}
+      <section id="schedule" className="py-20 px-6 bg-white">
+        <div className="container mx-auto max-w-4xl">
+           <div className="flex flex-col md:flex-row gap-12">
+             <div className="md:w-1/2">
+                <h3 className="font-black text-2xl mb-6 flex items-center gap-2">
+                  <Calendar className="text-blue-600" /> ROADMAP
+                </h3>
+                <div className="border-l-2 border-blue-100 pl-8 space-y-8 relative">
+                  <div className="relative">
+                    <div className="absolute -left-[39px] top-1 w-5 h-5 bg-blue-600 rounded-full border-4 border-white shadow"></div>
+                    <span className="text-sm font-bold text-slate-400">NOW</span>
+                    <h4 className="font-bold text-lg">プロジェクト始動</h4>
+                    <p className="text-slate-600 text-sm">目標：2年で1500人</p>
+                  </div>
+                  <div className="relative opacity-70">
+                     <div className="absolute -left-[39px] top-1 w-5 h-5 bg-slate-300 rounded-full border-4 border-white"></div>
+                    <span className="text-sm font-bold text-slate-400">2026 (予定)</span>
+                    <h4 className="font-bold text-lg">目標達成・展示会開催</h4>
+                    <p className="text-slate-600 text-sm">撮影した1500枚の写真を展示。</p>
+                  </div>
+                </div>
+             </div>
+
+             <div className="md:w-1/2">
+               <h3 className="font-black text-2xl mb-6">DIARY</h3>
+               <div className="space-y-4">
+                 {diaryEntries.map((entry, i) => (
+                   <div key={i} className="bg-slate-50 p-4 rounded-lg hover:bg-slate-100 transition cursor-pointer">
+                     <span className="text-xs font-bold text-blue-600 block mb-1">{entry.date}</span>
+                     <h4 className="font-bold mb-2">{entry.title}</h4>
+                     <p className="text-sm text-slate-600 line-clamp-2">{entry.content}</p>
+                   </div>
+                 ))}
+                 <a href="#" className="text-sm font-bold text-blue-600 inline-block mt-2">日記一覧を見る &rarr;</a>
+               </div>
+             </div>
+           </div>
+        </div>
+      </section>
+
+      {/* Q&A */}
+      <section id="faq" className="py-20 bg-slate-50 px-6">
+        <div className="container mx-auto max-w-3xl">
+          <h2 className="text-center text-2xl font-black mb-12">よくある質問 (Q&A)</h2>
+          <div className="space-y-4">
+            {[
+              { q: '決済方法は？', a: 'クレジットカード決済・Pay ID 翌月あと払いのみご利用可能です。' },
+              { q: 'チケットに有効期限はありますか？', a: '基本的にはございません。ですが、2年以内に1500人達成を目指しておりますので、なるべく早めにご参加いただけると嬉しいです。' },
+              { q: '撮影地はどこですか？', a: '基本的には「札幌駅周辺」でお願いします。全国各地へ飛んでいく所存ですので、ミーティングにて擦り合わせましょう。' },
+              { q: 'グループでの申し込みは？', a: 'お一人一枚のチケットをご購入ください（撮影はソロカットになります）。代表者様の一括購入は可能です。' },
+              { q: 'チケットをプレゼントできますか？', a: 'はい、権利の贈答はOKです。ご本人と撮影される方が一緒に打ち合わせに参加いただくのが望ましいです。転売は禁止です。' }
+            ].map((item, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-sm overflow-hidden">
+                <button 
+                  className="w-full text-left p-5 font-bold flex justify-between items-center"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <span className="flex items-center gap-3"><span className="text-blue-600">Q.</span> {item.q}</span>
+                  <ChevronDown className={`transition-transform ${activeFaq === index ? 'rotate-180' : ''}`} size={16} />
+                </button>
+                {activeFaq === index && (
+                  <div className="p-5 pt-0 text-slate-600 text-sm border-t border-slate-100">
+                    <div className="mt-3 leading-relaxed">{item.a}</div>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* スポンサー・タイアップ */}
+      <section className="py-16 bg-white border-t border-slate-200 px-6">
+        <div className="container mx-auto text-center max-w-4xl">
+          <span className="text-xs font-bold tracking-widest text-slate-400 mb-4 block">SPECIAL THANKS & SPONSORS</span>
+          <div className="bg-slate-50 p-8 rounded-2xl">
+            <h3 className="font-bold text-lg mb-4">タイアップ広告・協賛について</h3>
+            <p className="text-sm text-slate-600 mb-6">
+              本プロジェクト、および展示会・写真集におけるタイアップ広告、企業スポンサー様を募集しております。<br/>
+              街のPRとしての撮影（街ブラスナップ）なども承りますので、お気軽にお問い合わせください。
+            </p>
+            <a href="mailto:contact@example.com" className="inline-block bg-white border border-slate-300 px-6 py-2 rounded-full text-sm font-bold hover:bg-slate-100 transition">
+              お問い合わせフォームへ
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* フッター */}
+      <footer className="bg-slate-900 text-slate-400 py-12 px-6 text-sm">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <h2 className="text-white text-xl font-bold tracking-tighter mb-2">STUDIO USHIO</h2>
+            <p>1500 × 1500 PROJECT</p>
+            <p className="mt-2 text-xs">Operator: MiLio, LLC. / Takanori Shimizu</p>
+          </div>
+          <div className="flex gap-6">
+            <a href="https://instagram.com/430SANPO" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-2">
+              <Instagram /> 430SANPO
+            </a>
+            <a href="https://instagram.com/STUDIO_USHIO" target="_blank" rel="noopener noreferrer" className="hover:text-white transition flex items-center gap-2">
+               STUDIO_USHIO
+            </a>
+          </div>
+        </div>
+        <div className="text-center mt-12 text-xs text-slate-600">
+          &copy; 2024-2026 MiLio LLC. All Rights Reserved.
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default ProjectSite;
