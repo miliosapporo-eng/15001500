@@ -102,27 +102,36 @@
             transform: rotate(180deg);
         }
 
-        /* 回転装飾 (1500images.png用) */
-        @keyframes spin-slow-left {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(-360deg); }
-        }
-        .hero-rotating-img {
+        /* 水平スライドループアニメーション */
+        .hero-scroll-wrapper {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            /* 画面中央に配置し、適度な大きさにする */
-            width: 100%; 
-            max-width: 900px;
-            aspect-ratio: 1/1;
-            object-fit: contain;
-            /* 馴染ませる処理 */
-            opacity: 0.15; 
-            mix-blend-mode: screen; /* スクリーンモードで光のように馴染ませる */
-            /* アニメーション */
-            animation: spin-slow-left 120s linear infinite; /* 2分かけて1周 */
-            pointer-events: none; /* クリックを邪魔しない */
-            z-index: 1; /* 背景(0)より上、コンテンツ(10)より下 */
+            inset: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.15;
+            mix-blend-mode: screen; /* 馴染ませる */
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+        }
+        .hero-scroll-content {
+            display: flex;
+            /* 画像2枚分（幅の半分）を左から右へ移動させる */
+            animation: scroll-left-to-right 60s linear infinite;
+            width: fit-content;
+        }
+        .hero-scroll-content img {
+            height: 90vh; /* 画面高さの90%程度 */
+            width: auto;
+            max-width: none; /* 縮小防止 */
+            flex-shrink: 0;
+            /* 1周した時に繋がるように画像を複製して並べる */
+        }
+        @keyframes scroll-left-to-right {
+            /* 左(-50%)から右(0%)へ移動することで、左から右へ流れるように見せる */
+            0% { transform: translateX(-50%); }
+            100% { transform: translateX(0%); }
         }
 
         /* スクロールバー */
@@ -191,8 +200,14 @@
 
     <!-- ヒーローセクション -->
     <header class="relative pt-32 pb-16 md:pt-48 md:pb-32 px-6 overflow-hidden bg-otaru-main">
-        <!-- 追加: 回転する装飾画像 -->
-        <img src="images/1500images.png" alt="" class="hero-rotating-img">
+        <!-- 追加: 水平スライドループ装飾 -->
+        <div class="hero-scroll-wrapper">
+            <div class="hero-scroll-content">
+                <!-- 継ぎ目なくループさせるために画像を2つ並べる -->
+                <img src="images/1500images.png" alt="">
+                <img src="images/1500images.png" alt="">
+            </div>
+        </div>
 
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
