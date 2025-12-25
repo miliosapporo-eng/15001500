@@ -102,6 +102,29 @@
             transform: rotate(180deg);
         }
 
+        /* 回転装飾 (1500images.png用) */
+        @keyframes spin-slow-left {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(-360deg); }
+        }
+        .hero-rotating-img {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            /* 画面中央に配置し、適度な大きさにする */
+            width: 100%; 
+            max-width: 900px;
+            aspect-ratio: 1/1;
+            object-fit: contain;
+            /* 馴染ませる処理 */
+            opacity: 0.15; 
+            mix-blend-mode: screen; /* スクリーンモードで光のように馴染ませる */
+            /* アニメーション */
+            animation: spin-slow-left 120s linear infinite; /* 2分かけて1周 */
+            pointer-events: none; /* クリックを邪魔しない */
+            z-index: 1; /* 背景(0)より上、コンテンツ(10)より下 */
+        }
+
         /* スクロールバー */
         ::-webkit-scrollbar {
             width: 8px;
@@ -168,6 +191,9 @@
 
     <!-- ヒーローセクション -->
     <header class="relative pt-32 pb-16 md:pt-48 md:pb-32 px-6 overflow-hidden bg-otaru-main">
+        <!-- 追加: 回転する装飾画像 -->
+        <img src="images/1500images.png" alt="" class="hero-rotating-img">
+
         <div class="container mx-auto max-w-6xl relative z-10">
             <div class="flex flex-col md:flex-row items-center gap-12 md:gap-20">
                 <div class="md:w-1/2 order-2 md:order-1">
@@ -535,52 +561,28 @@
 
                 <!-- 参考画像 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                    <div class="rounded-2xl overflow-hidden border border-otaru-gold/30 shadow-lg group relative h-64 bg-slate-800">
-                        <img src="images/menu01.jpg" alt="Menu Sample 1" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331]/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                            <span class="text-otaru-gold font-zen text-sm">Portrait / Snap</span>
+                    <!-- 画像1 -->
+                    <div class="rounded-2xl overflow-hidden border border-otaru-gold/30 shadow-lg group relative h-64 bg-slate-800 cursor-pointer">
+                        <img 
+                            src="images/menu01.jpg" 
+                            alt="Menu Sample 1" 
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100 zoomable-image"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331]/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold font-zen text-sm">Portrait / Snap <span class="text-xs ml-2 text-white">(Click to Zoom)</span></span>
                         </div>
                     </div>
-                    <div class="rounded-2xl overflow-hidden border border-otaru-gold/30 shadow-lg group relative h-64 bg-slate-800">
-                        <img src="images/menu02.jpg" alt="Menu Sample 2" class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331]/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-                            <span class="text-otaru-gold font-zen text-sm">Dog / Location</span>
+                    <!-- 画像2 -->
+                    <div class="rounded-2xl overflow-hidden border border-otaru-gold/30 shadow-lg group relative h-64 bg-slate-800 cursor-pointer">
+                        <img 
+                            src="images/menu02.jpg" 
+                            alt="Menu Sample 2" 
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700 opacity-80 group-hover:opacity-100 zoomable-image"
+                        >
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331]/80 to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold font-zen text-sm">Dog / Location <span class="text-xs ml-2 text-white">(Click to Zoom)</span></span>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Bank Account Info -->
-            <div class="mt-20 pt-16 border-t border-otaru-gold/20 text-center">
-                <h3 class="text-3xl font-zen text-otaru-gold mb-8 drop-shadow-md">寄付はこちら</h3>
-                <div class="bg-[#103b4a]/30 inline-block p-8 md:p-10 rounded-3xl border border-otaru-gold/30 text-left shadow-2xl relative overflow-hidden group hover:border-otaru-gold/60 transition duration-500">
-                    <!-- 装飾 -->
-                    <div class="absolute top-0 right-0 w-16 h-16 border-t border-r border-otaru-gold rounded-tr-2xl opacity-50"></div>
-                    <div class="absolute bottom-0 left-0 w-16 h-16 border-b border-l border-otaru-gold rounded-bl-2xl opacity-50"></div>
-                    
-                    <p class="text-slate-300 text-sm mb-6 font-zen text-center border-b border-otaru-gold/20 pb-4">銀行振込でのご支援も受け付けております</p>
-                    <dl class="text-slate-200 space-y-4 font-zen text-lg">
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
-                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">銀行名</dt>
-                            <dd class="font-bold tracking-wider">◯◯銀行</dd>
-                        </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
-                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">支店名</dt>
-                            <dd class="font-bold tracking-wider">◯◯支店</dd>
-                        </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
-                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">口座種別</dt>
-                            <dd class="font-bold tracking-wider">普通</dd>
-                        </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6">
-                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">口座番号</dt>
-                            <dd class="font-bold tracking-widest font-futuristic text-xl">1234567</dd>
-                        </div>
-                        <div class="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-6 pt-2 border-t border-dashed border-otaru-gold/30 mt-2">
-                            <dt class="w-24 text-otaru-gold text-sm sm:text-base opacity-80">口座名義</dt>
-                            <dd class="font-bold tracking-wider">合同会社MiLio</dd>
-                        </div>
-                    </dl>
                 </div>
             </div>
         </div>
@@ -674,20 +676,64 @@
         </div>
     </section>
 
-    <!-- スポンサー・タイアップ -->
-    <section class="py-20 bg-[#0d2331] text-slate-400 px-6 border-t border-otaru-gold/20">
-        <div class="container mx-auto text-center max-w-4xl">
-            <div class="border border-otaru-gold/30 bg-[#103b4a]/30 p-8 md:p-12 rounded-2xl relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-otaru-gold rounded-full blur-[80px] opacity-10"></div>
-                
-                <h3 class="text-white font-bold text-xl mb-4 relative z-10 font-zen tracking-wide">タイアップ広告・協賛について</h3>
-                <p class="text-sm text-slate-300 mb-8 leading-relaxed relative z-10 max-w-2xl mx-auto font-zen">
-                    本プロジェクト、および展示会・写真集における<br>タイアップ広告、企業スポンサー様を募集しております。<br/>
-                    街のPRとしての撮影（街ブラスナップ）なども承りますので、お気軽にお問い合わせください。
-                </p>
-                <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 bg-otaru-gold text-[#0d2331] px-8 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-[#0d2331] transition duration-300 relative z-10 font-zen tracking-wide shadow-lg group">
-                    <i data-lucide="mail" class="w-4 h-4 group-hover:scale-110 transition"></i> お問い合わせフォームへ
-                </a>
+    <!-- スポンサー・寄付 -->
+    <section class="py-24 bg-[#0d2331] text-slate-400 px-6 border-t border-otaru-gold/20">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl font-medieval text-center text-white mb-12 tracking-wide drop-shadow-[0_2px_0_#d4af37]">PARTNERSHIP & DONATION</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                <!-- タイアップ広告 -->
+                <div class="border border-otaru-gold/30 bg-[#103b4a]/30 p-8 rounded-3xl relative overflow-hidden flex flex-col justify-center text-center shadow-lg group hover:border-otaru-gold/60 transition duration-500">
+                    <!-- 装飾 -->
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-otaru-gold/5 rounded-full blur-2xl"></div>
+                    
+                    <h3 class="text-white font-bold text-xl mb-6 relative z-10 font-zen tracking-wide">タイアップ広告・協賛について</h3>
+                    <p class="text-sm text-slate-300 mb-8 leading-relaxed relative z-10 max-w-xl mx-auto font-zen">
+                        本プロジェクト、および展示会・写真集における<br>タイアップ広告、企業スポンサー様を募集しております。<br/>
+                        街のPRとしての撮影（街ブラスナップ）なども承りますので、お気軽にお問い合わせください。
+                        <br><br>
+                        <strong class="text-white text-base block mb-1">撮影後に続くプロジェクト‼️</strong>
+                        展示会・製本販売には<span class="text-otaru-gold font-bold text-lg mx-1">2500万円</span>必要です。<br>ぜひお力添えよろしくお願いします。
+                    </p>
+                    <div class="mt-auto">
+                        <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 bg-otaru-gold text-[#0d2331] px-8 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-[#0d2331] transition duration-300 relative z-10 font-zen tracking-wide shadow-lg group-hover:scale-105">
+                            <i data-lucide="mail" class="w-4 h-4 group-hover:scale-110 transition"></i> お問い合わせフォームへ
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 銀行振込 -->
+                <div class="border border-otaru-gold/30 bg-[#103b4a]/30 p-8 rounded-3xl relative overflow-hidden shadow-lg group hover:border-otaru-gold/60 transition duration-500">
+                     <!-- 装飾 -->
+                    <div class="absolute top-0 left-0 w-16 h-16 border-t border-l border-otaru-gold/30 rounded-tl-2xl opacity-50"></div>
+                    <div class="absolute bottom-0 right-0 w-16 h-16 border-b border-r border-otaru-gold/30 rounded-br-2xl opacity-50"></div>
+
+                    <h3 class="text-white font-bold text-xl mb-2 text-center font-zen tracking-wide">寄付はこちら</h3>
+                    <p class="text-otaru-gold text-xs mb-6 font-zen text-center opacity-80">銀行振込でのご支援も受け付けております</p>
+                    
+                    <dl class="text-slate-200 space-y-3 font-zen text-base bg-[#0d2331]/50 p-6 rounded-xl border border-otaru-gold/10">
+                        <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                            <dt class="text-otaru-gold text-sm">銀行名</dt>
+                            <dd class="font-bold tracking-wider">北洋銀行</dd>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                            <dt class="text-otaru-gold text-sm">支店名</dt>
+                            <dd class="font-bold tracking-wider">宮の森支店</dd>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                            <dt class="text-otaru-gold text-sm">口座種別</dt>
+                            <dd class="font-bold tracking-wider">普通</dd>
+                        </div>
+                        <div class="flex justify-between border-b border-slate-700/50 pb-2">
+                            <dt class="text-otaru-gold text-sm">口座番号</dt>
+                            <dd class="font-bold tracking-widest font-futuristic text-lg">4119909</dd>
+                        </div>
+                        <div class="flex justify-between pt-1">
+                            <dt class="text-otaru-gold text-sm">口座名義</dt>
+                            <dd class="font-bold tracking-wider">合同会社MiLio</dd>
+                        </div>
+                    </dl>
+                </div>
             </div>
         </div>
     </section>
@@ -717,6 +763,16 @@
             &copy; 2025 MiLio, LLC. All Rights Reserved.
         </div>
     </footer>
+
+    <!-- 画像拡大用モーダル -->
+    <div id="image-modal" class="fixed inset-0 z-[60] bg-black/90 hidden flex items-center justify-center p-4 opacity-0 transition-opacity duration-300 backdrop-blur-sm">
+        <button id="modal-close" class="absolute top-6 right-6 text-white hover:text-otaru-gold transition transform hover:scale-110 z-50 bg-black/50 rounded-full p-2">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div class="relative max-w-5xl w-full h-full flex items-center justify-center p-4">
+            <img id="modal-img" src="" alt="Zoomed Image" class="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border border-otaru-gold/50 transform scale-95 transition-transform duration-300">
+        </div>
+    </div>
 
     <!-- JavaScript制御 -->
     <script>
@@ -780,6 +836,58 @@
                 const svg = toggle.querySelector('svg');
                 if(svg) svg.classList.toggle('rotate-180');
             });
+        });
+
+        // 画像モーダル制御
+        const modal = document.getElementById('image-modal');
+        const modalImg = document.getElementById('modal-img');
+        const closeBtn = document.getElementById('modal-close');
+        const zoomableImages = document.querySelectorAll('.zoomable-image');
+
+        // 画像クリックで開く
+        zoomableImages.forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation(); // イベント冒泡防止
+                const src = img.getAttribute('src');
+                modalImg.src = src;
+                
+                modal.classList.remove('hidden');
+                // アニメーション用クラス操作（少し遅延させる）
+                requestAnimationFrame(() => {
+                    modal.classList.remove('opacity-0');
+                    modalImg.classList.remove('scale-95');
+                    modalImg.classList.add('scale-100');
+                });
+            });
+        });
+
+        // モーダルを閉じる関数
+        const closeModal = () => {
+            modal.classList.add('opacity-0');
+            modalImg.classList.remove('scale-100');
+            modalImg.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+                modalImg.src = '';
+            }, 300); // transitionの時間に合わせる
+        };
+
+        // 閉じるボタンクリック
+        closeBtn.addEventListener('click', closeModal);
+
+        // 背景クリックで閉じる
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal || e.target.closest('.relative') === e.target) {
+                closeModal();
+            }
+        });
+
+        // ESCキーで閉じる
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
         });
     </script>
 </body>
