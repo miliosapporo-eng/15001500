@@ -489,9 +489,11 @@
                 </p>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 items-start">
+            <!-- items-start を items-stretch に変更して高さを揃える -->
+            <div class="grid md:grid-cols-2 gap-8 items-stretch">
                 <!-- 通常参加チケット -->
-                <div class="bg-gradient-to-b from-[#103b4a] to-[#0d2331] rounded-3xl p-8 md:p-10 shadow-[0_0_20px_rgba(0,0,0,0.3)] border border-otaru-gold/30 transition hover:-translate-y-1 hover:border-otaru-gold duration-300 relative overflow-hidden group">
+                <!-- flex flex-col h-full を追加 -->
+                <div class="bg-gradient-to-b from-[#103b4a] to-[#0d2331] rounded-3xl p-8 md:p-10 shadow-[0_0_20px_rgba(0,0,0,0.3)] border border-otaru-gold/30 transition hover:-translate-y-1 hover:border-otaru-gold duration-300 relative overflow-hidden group flex flex-col h-full">
                     <div class="absolute top-0 left-0 w-full h-1 bg-otaru-gold"></div>
                     <!-- 金継ぎライン装飾 -->
                     <div class="absolute -right-8 -bottom-8 w-32 h-32 border border-otaru-gold/20 rounded-full"></div>
@@ -523,16 +525,18 @@
                         </li>
                     </ul>
                     
-                    <!-- ボタンをリンクタグに変更し、URLを設定 -->
-                    <a href="https://dsl.theshop.jp/items/129792405" target="_blank" rel="noopener noreferrer" class="w-full bg-otaru-gold text-[#0d2331] py-4 rounded-xl font-bold hover:bg-white transition flex justify-center items-center gap-2 group font-zen tracking-wide gold-shine shadow-lg">
+                    <!-- ボタンに mt-auto を追加して下揃えにする -->
+                    <a href="https://dsl.theshop.jp/items/129792405" target="_blank" rel="noopener noreferrer" class="w-full bg-otaru-gold text-[#0d2331] py-4 rounded-xl font-bold hover:bg-white transition flex justify-center items-center gap-2 group font-zen tracking-wide gold-shine shadow-lg mt-auto">
                         BASEで購入する <i data-lucide="external-link" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
                     </a>
                 </div>
 
                 <!-- 応援・遠方チケット -->
-                <div class="bg-gradient-to-b from-[#2d2210] to-[#0d2331] rounded-3xl p-8 md:p-10 shadow-[0_0_20px_rgba(212,175,55,0.1)] border border-yellow-700/50 transition hover:-translate-y-1 hover:border-otaru-gold duration-300 relative overflow-hidden group">
+                <!-- flex flex-col h-full を追加 -->
+                <div class="bg-gradient-to-b from-[#2d2210] to-[#0d2331] rounded-3xl p-8 md:p-10 shadow-[0_0_20px_rgba(212,175,55,0.1)] border border-yellow-700/50 transition hover:-translate-y-1 hover:border-otaru-gold duration-300 relative overflow-hidden group flex flex-col h-full">
                     <div class="absolute top-0 right-0 bg-otaru-gold text-[#0d2331] text-xs font-medieval tracking-wider px-4 py-2 rounded-bl-xl z-10">GIFT / SUPPORT</div>
-                    <h3 class="text-2xl font-bold mb-2 text-otaru-gold font-zen">無期限有効チケット</h3>
+                    <!-- 名称変更: 無期限有効チケット -> 応援チケット -->
+                    <h3 class="text-2xl font-bold mb-2 text-otaru-gold font-zen">応援チケット</h3>
                     <p class="text-slate-500 text-sm mb-6 font-zen">遠方の方・ご支援・プレゼントに</p>
                     
                     <div class="flex items-baseline gap-1 mb-8">
@@ -546,7 +550,8 @@
                         大切な人の肖像を残しておきたいとお考えではありませんか？もしよかったら、この企画のお話ししてみてください。
                     </div>
                     
-                    <a href="https://DSL.theshop.jp/items/129795239" target="_blank" rel="noopener noreferrer" class="w-full bg-transparent border-2 border-otaru-gold text-otaru-gold py-4 rounded-xl font-bold hover:bg-otaru-gold hover:text-[#0d2331] transition flex justify-center items-center gap-2 group font-zen tracking-wide block text-center">
+                    <!-- ボタンに mt-auto を追加して下揃えにする -->
+                    <a href="https://DSL.theshop.jp/items/129795239" target="_blank" rel="noopener noreferrer" class="w-full bg-transparent border-2 border-otaru-gold text-otaru-gold py-4 rounded-xl font-bold hover:bg-otaru-gold hover:text-[#0d2331] transition flex justify-center items-center gap-2 group font-zen tracking-wide block text-center mt-auto">
                         BASEで応援購入する <i data-lucide="external-link" class="w-4 h-4 group-hover:translate-x-1 transition"></i>
                     </a>
                 </div>
