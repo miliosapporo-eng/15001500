@@ -134,6 +134,46 @@
             100% { transform: translateX(0%); }
         }
 
+        /* ギャラリー用無限スクロール (右から左へ) */
+        .gallery-marquee-wrapper {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 20px 0;
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); /* 両端をフェード */
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+        .gallery-marquee-content {
+            display: flex;
+            width: fit-content;
+            /* 画像セットの幅分だけ移動させる */
+            animation: gallery-scroll 40s linear infinite;
+        }
+        .gallery-marquee-content:hover {
+            animation-play-state: paused; /* ホバーで停止 */
+        }
+        @keyframes gallery-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .gallery-item {
+            flex-shrink: 0;
+            width: 300px;
+            aspect-ratio: 4/5;
+            margin-right: 24px;
+            border-radius: 1rem;
+            overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            position: relative;
+            background-color: #1e293b;
+            cursor: pointer;
+            transition: border-color 0.3s, transform 0.3s;
+        }
+        .gallery-item:hover {
+            border-color: #d4af37;
+            transform: scale(1.02);
+        }
+
         /* スクロールバー */
         ::-webkit-scrollbar {
             width: 8px;
@@ -412,8 +452,8 @@
     </section>
 
     <!-- ギャラリー (Preview) -->
-    <section id="gallery" class="py-24 relative px-6 bg-gradient-to-b from-[#0a1b26] to-[#0d2331]">
-        <div class="container mx-auto">
+    <section id="gallery" class="py-24 relative px-0 bg-gradient-to-b from-[#0a1b26] to-[#0d2331]">
+        <div class="container mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4 border-b border-otaru-gold/30 pb-4">
                 <div>
                     <h2 class="text-5xl font-medieval mb-2 text-white tracking-wide">PREVIEW</h2>
@@ -423,54 +463,81 @@
                     <i data-lucide="instagram" class="w-5 h-5"></i> Instagramで作品を見る
                 </a>
             </div>
+        </div>
 
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                <!-- Image 1 -->
-                <div class="aspect-[4/5] bg-slate-800 rounded-xl overflow-hidden group relative shadow-lg border border-transparent hover:border-otaru-gold transition duration-500">
-                    <img 
-                        src="https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&q=80&w=600" 
-                        alt="Portrait" 
-                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
-                        <span class="text-otaru-gold text-lg font-medieval tracking-widest border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+        <!-- マーキーエリア -->
+        <div class="gallery-marquee-wrapper">
+            <div class="gallery-marquee-content">
+                <!-- 画像セット1 (オリジナル) -->
+                <div class="flex">
+                    <!-- Image 1 -->
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
+                    </div>
+                    <!-- Image 2 -->
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
+                    </div>
+                    <!-- Image 3 -->
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
+                    </div>
+                    <!-- Image 4 -->
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
+                    </div>
+                    <!-- Image 5 (Add more variety) -->
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
                     </div>
                 </div>
-                <!-- Image 2 -->
-                <div class="aspect-[4/5] bg-slate-800 rounded-xl overflow-hidden group relative shadow-lg border border-transparent hover:border-otaru-gold transition duration-500">
-                    <img 
-                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" 
-                        alt="Portrait" 
-                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
-                        <span class="text-otaru-gold text-lg font-medieval tracking-widest border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+
+                <!-- 画像セット2 (ループ用複製: セット1と同じ内容) -->
+                <div class="flex">
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Image 3 -->
-                <div class="aspect-[4/5] bg-slate-800 rounded-xl overflow-hidden group relative shadow-lg border border-transparent hover:border-otaru-gold transition duration-500">
-                    <img 
-                        src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600" 
-                        alt="Portrait" 
-                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
-                        <span class="text-otaru-gold text-lg font-medieval tracking-widest border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
                     </div>
-                </div>
-                <!-- Image 4 -->
-                <div class="aspect-[4/5] bg-slate-800 rounded-xl overflow-hidden group relative shadow-lg border border-transparent hover:border-otaru-gold transition duration-500">
-                    <img 
-                        src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=600" 
-                        alt="Portrait" 
-                        class="w-full h-full object-cover transition duration-700 group-hover:scale-110 opacity-80 group-hover:opacity-100 grayscale group-hover:grayscale-0" 
-                        loading="lazy"
-                    >
-                    <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-6">
-                        <span class="text-otaru-gold text-lg font-medieval tracking-widest border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
+                    </div>
+                    <div class="gallery-item group">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600" alt="Portrait" class="w-full h-full object-cover zoomable-image">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0d2331] to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4 pointer-events-none">
+                            <span class="text-otaru-gold text-xs font-medieval border border-otaru-gold px-2 py-1 rounded bg-[#0d2331]/80">#1500PROJECT</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -743,7 +810,8 @@
                         展示会・製本販売には<span class="text-otaru-gold font-bold text-lg mx-1">2500万円</span>必要です。<br>ぜひお力添えよろしくお願いします。
                     </p>
                     <div class="mt-auto">
-                        <a href="mailto:contact@example.com" class="inline-flex items-center gap-2 bg-otaru-gold text-[#0d2331] px-8 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-[#0d2331] transition duration-300 relative z-10 font-zen tracking-wide shadow-lg group-hover:scale-105">
+                        <!-- メールアドレスを変更 -->
+                        <a href="mailto:1500project@design4qol.com" class="inline-flex items-center gap-2 bg-otaru-gold text-[#0d2331] px-8 py-3 rounded-full text-sm font-bold hover:bg-white hover:text-[#0d2331] transition duration-300 relative z-10 font-zen tracking-wide shadow-lg group-hover:scale-105">
                             <i data-lucide="mail" class="w-4 h-4 group-hover:scale-110 transition"></i> お問い合わせフォームへ
                         </a>
                     </div>
